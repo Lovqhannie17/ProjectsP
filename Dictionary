@@ -1,0 +1,18 @@
+meme_dict = {
+    "NGL": "not gonna lie",
+    "ASAP": "as soon as possible",
+    "BTW": "by the way",
+    "ATM": "at the moment",
+    "BRB": "be right back",
+    "TBA": "to be announced",
+    "TNX": "thanks",
+    "TMI": "too much information",
+    "IMO": "in my opinion",
+    "TY": "thank you"
+}
+print("Привет! Это программа-объяснялка")
+word = input("Введите непонятное слово (большими латинскими буквами!): ")
+if word in meme_dict.keys():
+    print(meme_dict[word])
+else:
+    print("К сожалению этого слова нет в словаре:(")
