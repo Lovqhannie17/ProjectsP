@@ -1,0 +1,39 @@
+!pip install pyTelegramBotAPI
+
+
+import telebot
+import random
+
+BOT_TOKEN = ''
+bot = telebot.TeleBot(BOT_TOKEN)
+
+animal_memes = [
+    {'file': 'meme1.jpg', 'rarity': 10},
+    {'file': 'meme2.jpg', 'rarity': 10},
+    {'file': 'meme3.jpg', 'rarity': 8},
+    {'file': 'meme4.jpg', 'rarity': 8},
+    {'file': 'meme5.jpg', 'rarity': 6},
+    {'file': 'meme6.jpg', 'rarity': 6},
+    {'file': 'meme7.jpg', 'rarity': 4},
+    {'file': 'meme8.jpg', 'rarity': 4},
+    {'file': 'meme9.jpg', 'rarity': 3},
+    {'file': 'meme10.jpg', 'rarity': 3},
+    {'file': 'meme11.jpg', 'rarity': 2},
+    {'file': 'meme12.jpg', 'rarity': 2},
+    {'file': 'meme13.jpg', 'rarity': 1},
+    {'file': 'meme14.jpg', 'rarity': 1},
+]
+
+def get_random_animal_meme():
+    files = [m['file'] for m in animal_memes]
+    weights = [m['rarity'] for m in animal_memes]
+    chosen_file = random.choices(files, weights=weights, k=1)[0]
+    return chosen_file
+
+@bot.message_handler(commands=['animals'])
+def send_animal_meme(message):
+    meme_file = get_random_animal_meme()
+    with open(meme_file, 'rb') as f:
+        bot.send_photo(message.chat.id, f)
+
+bot.polling()
